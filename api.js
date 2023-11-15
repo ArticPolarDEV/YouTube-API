@@ -1,44 +1,33 @@
-var http = require('http')
 var express = require('express')
 var path = require('path')
-
+var ytdl = require('ytdl-core');
 var favicon = require('serve-favicon')
-var logger = require('morgan')
-var methodOverride = require('method-override')
-var session = require('express-session')
 var bodyParser = require('body-parser')
-var multer = require('multer')
-var errorHandler = require('errorhandler')
+require('dotenv').config();
 
-var app = express()
+var app = express();
+var PORT = process.env.PORT || 80;
+
+// Routers
+var getaudio = require('./routers/getaudio');
+var version = require('./routers/version');
 
 // all environments
-app.set('port', process.env.PORT || 3000)
-app.set('views', path.join(__dirname, 'views'))
-app.set('view engine', 'pug')
+app.set('port', PORT)
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')))
-app.use(logger('dev'))
-app.use(methodOverride())
-app.use(session({
-  resave: true,
-  saveUninitialized: true,
-  secret: 'uwotm8'
-}))
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-app.use(multer())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.status(200).json({
+    status: 200,
+    message: "API Working"
+  });
 })
 
-// error handling middleware should be loaded after the loading the routes
-if (app.get('env') === 'development') {
-  app.use(errorHandler())
-}
+app.use('/api/getaudio', getaudio);
+app.use('/api/version', version);
 
-var server = http.createServer(app)
-server.listen(app.get('port'), () => {
-  console.log('Express server listening on port ' + app.get('port'))
+app.listen(PORT, () => {
+  console.log('Express server listening on port ' + PORT);
 })
