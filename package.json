@@ -1,13 +1,19 @@
 {
-  "private": true,
+  "name": "youtubeapi",
+  "version": "0.0.1",
+  "private": false,
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "start": "node api.js"
   },
-  "devDependencies": {
-    "nuxt": "^3.0.0"
+  "dependencies": {
+    "body-parser": "^1.5.2",
+    "errorhandler": "^1.1.1",
+    "express": "^4.8.0",
+    "express-session": "^1.7.2",
+    "pug": "^2.0.0",
+    "method-override": "^2.1.2",
+    "morgan": "^1.2.2",
+    "multer": "^0.1.3",
+    "serve-favicon": "^2.0.1"
   }
 }
