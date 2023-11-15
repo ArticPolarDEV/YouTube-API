@@ -1,7 +1,5 @@
 var http = require('http')
 var express = require('express')
-var routes = require('./routes')
-var user = require('./routes/user')
 var path = require('path')
 
 var favicon = require('serve-favicon')
@@ -31,8 +29,9 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(multer())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.get('/', routes.index)
-app.get('/users', user.list)
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+})
 
 // error handling middleware should be loaded after the loading the routes
 if (app.get('env') === 'development') {
