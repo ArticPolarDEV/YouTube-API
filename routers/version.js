@@ -27,7 +27,8 @@ router.get('/', (req, res) => {
         "body-parser": getDependencyVersion("body-parser"),
         "express-session": getDependencyVersion("express-session"),
         "nodemon": getDependencyVersion("nodemon"),
-        "serve-favicon": getDependencyVersion("serve-favicon")
+        "serve-favicon": getDependencyVersion("serve-favicon"),
+        "vercel/node": getDependencyVersion("@vercel/node")
     });
   }
   catch (error) {
